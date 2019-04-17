@@ -83,10 +83,10 @@ public class GridTree {
   }
   
   /**
-   * Adjust grid tree when a node has more than M-1 elements or less than M/2 elements. 
+   * Adjust grid tree when a node has more than M elements or less than M/2 elements. 
    */
   public void adjustTree(Node current) {
-    if (current.getLength() > M - 1) {
+    if (current.getLength() > M) {
       // Node is full, need split
       Rectangle curRange = current.getRange();
       
@@ -120,7 +120,6 @@ public class GridTree {
       for (Iterator<NodeElement> iterator = current.getElements().iterator(); iterator.hasNext();) {
         NodeElement e = iterator.next();
         if (!current.getRange().contains(e.getRange())) {
-          e.setParent(newer);
           newer.add(e);
           iterator.remove();
         }
@@ -146,13 +145,13 @@ public class GridTree {
       } else {
         // current is not root
         Node parent = current.getParent();
-        
+        NodeElement newElem = new NodeElement();
+        newElem.setRange(newer.getRange());
+        newElem.setPointer(newer);
+        parent.add(newElem);
+        adjustTree(parent);
       }
-      
-    } else if (current.getLength() < M / 2) {
-      // Node is not enough, need merge.
     }
-    
   }
   
 }

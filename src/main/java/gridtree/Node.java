@@ -50,7 +50,6 @@ public class Node {
 class NodeElement {
   
   private Rectangle range;
-  private Object parent;
   private Object pointer;
 
   @Override
