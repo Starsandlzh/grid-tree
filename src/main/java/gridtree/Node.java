@@ -26,7 +26,7 @@ public class Node {
   public void remove(NodeElement element) {
     length--;
     elements.remove(element);
-  } 
+  }
   
   public NodeElement remove(Point p) {
     NodeElement flag = null;
@@ -43,7 +43,15 @@ public class Node {
       return null;
     }
   }
-  
+
+  @Override
+  public String toString() {
+    return "Node{" +
+        "isLeaf=" + isLeaf +
+        ", range=" + range +
+        ", length=" + length +
+        '}';
+  }
 }
 
 @Data

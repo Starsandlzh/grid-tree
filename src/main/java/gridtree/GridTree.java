@@ -94,7 +94,6 @@ public class GridTree {
       Node newer = new Node();
       newer.setIsLeaf(true);
       newer.setRange(new Rectangle(curRange));
-      newer.setParent(current.getParent());
       
       // split space
       Point bottomLeft = new Point(MAX, MAX); 
@@ -139,9 +138,9 @@ public class GridTree {
         newElem.setPointer(newer);
         newRoot.add(curElem);
         newRoot.add(newElem);
+        current.setParent(newRoot);
+        newer.setParent(newRoot);
         root = newRoot;
-        current.setParent(root);
-        newer.setParent(root);
       } else {
         // current is not root
         Node parent = current.getParent();
@@ -149,6 +148,7 @@ public class GridTree {
         newElem.setRange(newer.getRange());
         newElem.setPointer(newer);
         parent.add(newElem);
+        newer.setParent(parent);
         adjustTree(parent);
       }
     }
